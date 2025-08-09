@@ -33,7 +33,7 @@ const prompt = ai.definePrompt({
   output: { schema: PdfToTextOutputSchema },
   prompt: `Extract all the text from the following PDF document.
 
-PDF: {{media url="data:application/pdf;base64,{{pdfBase64}}" preserveAspectRatio=true}}`,
+PDF: {{media url=(concat "data:application/pdf;base64," pdfBase64) preserveAspectRatio=true}}`,
 });
 
 const pdfToTextFlow = ai.defineFlow(
