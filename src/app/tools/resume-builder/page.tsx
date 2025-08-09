@@ -18,6 +18,7 @@ import { Separator } from '@/components/ui/separator';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import Head from 'next/head';
+import { Label } from '@/components/ui/label';
 
 const experienceSchema = z.object({
   jobTitle: z.string().min(1, 'Job title is required'),
