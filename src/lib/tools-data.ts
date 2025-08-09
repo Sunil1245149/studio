@@ -79,7 +79,7 @@ export const toolsData: ToolCategory[] = [
     },
     tools: [
       { id: "tool-10", name: { en: "Lorem Ipsum Generator", hi: "लोरम इप्सम जेनरेटर", mr: "लोरेम इप्सम जनरेटर" }, description: { en: "Generate placeholder text.", hi: "प्लेसहोल्डर टेक्स्ट जेनरेट करें।", mr: "प्लेसहोल्डर मजकूर तयार करा." }, icon: ClipboardCheck, link: "#" },
-      { id: "tool-11", name: { en: "QR Code Generator", hi: "क्यूआर कोड जेनरेटर", mr: "QR कोड जनरेटर" }, description: { en: "Create QR codes for URLs and text.", hi: "URL और टेक्स्ट के लिए QR कोड बनाएं।", mr: "URL आणि मजकूरासाठी QR कोड तयार करा." }, icon: QrCode, link: "#" },
+      { id: "tool-11", name: { en: "QR Code Generator", hi: "क्यूआर कोड जेनरेटर", mr: "QR कोड जनरेटर" }, description: { en: "Create QR codes for URLs and text.", hi: "URL और टेक्स्ट के लिए QR कोड बनाएं।", mr: "URL आणि मजकूरासाठी QR कोड तयार करा." }, icon: QrCode, link: "/tools/qr-code-generator" },
       { id: "tool-12", name: { en: "JSON Formatter", hi: "JSON फ़ॉर्मैटर", mr: "JSON स्वरूपक" }, description: { en: "Beautify and validate JSON data.", hi: "JSON डेटा को सुंदर और मान्य करें।", mr: "JSON डेटा सुंदर आणि प्रमाणित करा." }, icon: FileJson, link: "#" },
     ],
   },
