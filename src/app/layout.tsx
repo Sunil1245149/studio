@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { LanguageProvider } from '@/contexts/language-context';
 import { Toaster } from '@/components/ui/toaster';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Tools Hub Express',
@@ -23,7 +24,7 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-body antialiased">
+      <body className={cn('font-body antialiased', 'animated-background')}>
         <LanguageProvider>
           {children}
           <Toaster />

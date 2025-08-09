@@ -86,3 +86,41 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .animated-background {
+    background: linear-gradient(
+      -45deg,
+      hsl(var(--primary) / 0.8),
+      hsl(var(--accent) / 0.8),
+      hsl(var(--chart-2) / 0.8),
+      hsl(var(--chart-4) / 0.8)
+    );
+    background-size: 400% 400%;
+    animation: gradient-animation 15s ease infinite;
+  }
+
+  .dark .animated-background {
+    background: linear-gradient(
+      -45deg,
+      hsl(var(--primary) / 0.4),
+      hsl(var(--accent) / 0.4),
+      hsl(var(--chart-2) / 0.4),
+      hsl(var(--chart-4) / 0.4)
+    );
+    background-size: 400% 400%;
+    animation: gradient-animation 15s ease infinite;
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
