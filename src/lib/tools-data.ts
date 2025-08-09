@@ -53,7 +53,7 @@ export const toolsData: ToolCategory[] = [
     },
     tools: [
       { id: "tool-4", name: { en: "Text to Speech", hi: "टेक्स्ट टू स्पीच", mr: "टेक्स्ट टू स्पीच" }, description: { en: "Convert written text into spoken words.", hi: "लिखित पाठ को बोले गए शब्दों में बदलें।", mr: "लिखाण मजकूर बोललेल्या शब्दात रूपांतरित करा." }, icon: FileText, link: "/tools/text-to-speech" },
-      { id: "tool-5", name: { en: "Image Converter", hi: "इमेज कन्वर्टर", mr: "प्रतिमा रूपांतरक" }, description: { en: "Convert images between formats like PNG, JPG.", hi: "छवियों को PNG, JPG जैसे प्रारूपों के बीच बदलें।", mr: "प्रतिमांना PNG, JPG सारख्या स्वरूपात रूपांतरित करा." }, icon: ImageIcon, link: "#" },
+      { id: "tool-5", name: { en: "Image Converter", hi: "इमेज कन्वर्टर", mr: "प्रतिमा रूपांतरक" }, description: { en: "Convert images between formats like PNG, JPG.", hi: "छवियों को PNG, JPG जैसे प्रारूपों के बीच बदलें।", mr: "प्रतिमांना PNG, JPG सारख्या स्वरूपात रूपांतरित करा." }, icon: ImageIcon, link: "/tools/image-converter" },
       { id: "tool-6", name: { en: "Case Converter", hi: "केस कन्वर्टर", mr: "केस रूपांतरक" }, description: { en: "Change text to uppercase, lowercase etc.", hi: "टेक्स्ट को अपरकेस, लोअरकेस आदि में बदलें।", mr: "मजकूर अपरकेस, लोअरकेस इत्यादीमध्ये बदला." }, icon: CaseSensitive, link: "#" },
     ],
   },
