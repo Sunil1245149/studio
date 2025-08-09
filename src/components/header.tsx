@@ -5,12 +5,13 @@ import { LanguageSelector } from "./language-selector";
 import { ThemeToggle } from "./theme-toggle";
 import { useLanguage } from "@/contexts/language-context";
 import { Hammer } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function Header() {
   const { t } = useLanguage();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className={cn("sticky top-0 z-50 w-full border-b border-border/40", "animated-background")}>
       <div className="container flex h-14 items-center">
         <div className="mr-4 flex items-center">
           <Link href="/" className="flex items-center space-x-2">

@@ -4,12 +4,13 @@ import { useLanguage } from "@/contexts/language-context";
 import { toolsData } from "@/lib/tools-data";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export function Footer() {
   const { t, language } = useLanguage();
 
   return (
-    <footer className="bg-muted/40 text-muted-foreground">
+    <footer className={cn("text-foreground", "animated-background")}>
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>

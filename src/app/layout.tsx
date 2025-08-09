@@ -24,7 +24,7 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className={cn('font-body antialiased', 'animated-background')}>
+      <body className={cn('font-body antialiased')}>
         <LanguageProvider>
           {children}
           <Toaster />
