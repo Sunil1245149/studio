@@ -91,25 +91,25 @@ body {
   .animated-background {
     background: linear-gradient(
       -45deg,
-      hsl(var(--primary) / 0.8),
-      hsl(var(--accent) / 0.8),
-      hsl(var(--chart-2) / 0.8),
-      hsl(var(--chart-4) / 0.8)
+      hsl(var(--primary) / 0.9),
+      hsl(var(--chart-1) / 0.9),
+      hsl(var(--chart-3) / 0.9),
+      hsl(var(--accent) / 0.9)
     );
     background-size: 400% 400%;
-    animation: gradient-animation 15s ease infinite;
+    animation: gradient-animation 10s ease infinite;
   }
 
   .dark .animated-background {
     background: linear-gradient(
       -45deg,
-      hsl(var(--primary) / 0.4),
-      hsl(var(--accent) / 0.4),
-      hsl(var(--chart-2) / 0.4),
-      hsl(var(--chart-4) / 0.4)
+      hsl(var(--primary) / 0.5),
+      hsl(var(--chart-1) / 0.5),
+      hsl(var(--chart-3) / 0.5),
+      hsl(var(--accent) / 0.5)
     );
     background-size: 400% 400%;
-    animation: gradient-animation 15s ease infinite;
+    animation: gradient-animation 10s ease infinite;
   }
 }
 
