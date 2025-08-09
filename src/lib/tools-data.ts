@@ -66,7 +66,7 @@ export const toolsData: ToolCategory[] = [
     },
     tools: [
       { id: "tool-7", name: { en: "Color Palette Generator", hi: "रंग पैलेट जेनरेटर", mr: "रंग पॅलेट जनरेटर" }, description: { en: "Create beautiful color schemes.", hi: "सुंदर रंग योजनाएं बनाएं।", mr: "सुंदर रंग योजना तयार करा." }, icon: Palette, link: "/tools/color-palette-generator" },
-      { id: "tool-8", name: { en: "Password Generator", hi: "पासवर्ड जेनरेटर", mr: "पासवर्ड जनरेटर" }, description: { en: "Generate strong, secure passwords.", hi: "मजबूत, सुरक्षित पासवर्ड बनाएं।", mr: "मजबूत, सुरक्षित पासवर्ड तयार करा." }, icon: KeyRound, link: "#" },
+      { id: "tool-8", name: { en: "Password Generator", hi: "पासवर्ड जेनरेटर", mr: "पासवर्ड जनरेटर" }, description: { en: "Generate strong, secure passwords.", hi: "मजबूत, सुरक्षित पासवर्ड बनाएं।", mr: "मजबूत, सुरक्षित पासवर्ड तयार करा." }, icon: KeyRound, link: "/tools/password-generator" },
       { id: "tool-9", name: { en: "Privacy Policy Generator", hi: "गोपनीयता नीति जेनरेटर", mr: "गोपनीयता धोरण जनरेटर" }, description: { en: "Create a privacy policy for your site.", hi: "अपनी साइट के लिए गोपनीयता नीति बनाएं।", mr: "आपल्या साइटसाठी गोपनीयता धोरण तयार करा." }, icon: Shield, link: "#" },
     ],
   },
