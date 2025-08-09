@@ -29,11 +29,11 @@ export async function pdfToText(input: PdfToTextInput): Promise<PdfToTextOutput>
 
 const prompt = ai.definePrompt({
   name: 'pdfToTextPrompt',
-  input: { schema: PdfToTextInputSchema },
+  input: { schema: z.object({ pdfDataUri: z.string() }) },
   output: { schema: PdfToTextOutputSchema },
   prompt: `Extract all the text from the following PDF document.
 
-PDF: {{media url=(concat "data:application/pdf;base64," pdfBase64) preserveAspectRatio=true}}`,
+PDF: {{media url=pdfDataUri preserveAspectRatio=true}}`,
 });
 
 const pdfToTextFlow = ai.defineFlow(
@@ -43,7 +43,9 @@ const pdfToTextFlow = ai.defineFlow(
     outputSchema: PdfToTextOutputSchema,
   },
   async (input) => {
-    const { output } = await prompt(input);
+    const { output } = await prompt({
+        pdfDataUri: `data:application/pdf;base64,${input.pdfBase64}`
+    });
     return output!;
   }
 );
