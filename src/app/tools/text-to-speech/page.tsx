@@ -32,7 +32,7 @@ export default function TextToSpeechPage() {
     setAudioDataUri(null);
 
     try {
-      const result = await textToSpeech(inputText);
+      const result = await textToSpeech({ text: inputText });
       setAudioDataUri(result.audioDataUri);
     } catch (error) {
       console.error('Error converting text to speech:', error);

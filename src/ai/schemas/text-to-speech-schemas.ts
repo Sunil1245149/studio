@@ -8,7 +8,10 @@
  */
 import { z } from 'genkit';
 
-export const TextToSpeechInputSchema = z.string();
+export const TextToSpeechInputSchema = z.object({
+  text: z.string().describe("The text to be converted to speech."),
+});
+
 export type TextToSpeechInput = z.infer<typeof TextToSpeechInputSchema>;
 
 export const TextToSpeechOutputSchema = z.object({
