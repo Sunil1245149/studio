@@ -3,12 +3,13 @@ import './globals.css';
 import { LanguageProvider } from '@/contexts/language-context';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
-import { Sidebar, SidebarContent, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { Sidebar, SidebarContent, SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { Hammer } from 'lucide-react';
 import { LanguageSelector } from '@/components/language-selector';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { toolsData } from '@/lib/tools-data';
+import { AppSidebar } from '@/components/app-sidebar';
+
 
 export const metadata: Metadata = {
   title: 'Tools Hub Express',
@@ -41,17 +42,7 @@ export default function RootLayout({
                     <span className="text-lg font-semibold">Tools Hub</span>
                   </Link>
                 </div>
-                <SidebarMenu>
-                  {toolsData.map((category) => (
-                    <SidebarMenuItem key={category.id}>
-                       <a href={`#${category.id}`} className="w-full">
-                        <SidebarMenuButton className="w-full justify-start">
-                           {category.name['en']}
-                        </SidebarMenuButton>
-                      </a>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
+                <AppSidebar />
               </SidebarContent>
             </Sidebar>
             <SidebarInset>
