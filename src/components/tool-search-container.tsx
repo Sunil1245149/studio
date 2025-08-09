@@ -18,6 +18,7 @@ import { useLanguage } from '@/contexts/language-context';
 import { suggestAlternativeSearches } from '@/ai/flows/search-assistant';
 import { Badge } from './ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { cn } from '@/lib/utils';
 
 type FormValues = {
   query: string;
@@ -66,7 +67,7 @@ export function ToolSearchContainer() {
   
   return (
     <div className="space-y-8">
-      <div className="text-center">
+      <div className="text-center animate-fade-in-up">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-primary font-headline">
           {t('title')}
         </h1>
@@ -75,7 +76,7 @@ export function ToolSearchContainer() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(handleSearch)} className="max-w-2xl mx-auto flex items-center space-x-2">
+      <form onSubmit={handleSubmit(handleSearch)} className="max-w-2xl mx-auto flex items-center space-x-2 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
         <div className="relative flex-grow">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
@@ -98,7 +99,7 @@ export function ToolSearchContainer() {
       {isAiLoading && <p className="text-center text-muted-foreground">{t('aiLoading')}</p>}
 
       {aiSuggestions.length > 0 && (
-        <Card className="max-w-2xl mx-auto bg-primary/10 border-primary/20">
+        <Card className="max-w-2xl mx-auto bg-primary/10 border-primary/20 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           <CardHeader>
             <CardTitle className="text-base font-medium flex items-center gap-2">
                 <Sparkles className="text-primary"/>
@@ -118,8 +119,8 @@ export function ToolSearchContainer() {
       )}
 
       <Accordion type="multiple" defaultValue={defaultActiveAccordionItems} className="w-full space-y-4">
-        {filteredData.map((category: ToolCategory) => (
-          <AccordionItem value={category.id} key={category.id} id={category.id} className="border-none">
+        {filteredData.map((category: ToolCategory, categoryIndex) => (
+          <AccordionItem value={category.id} key={category.id} id={category.id} className="border-none animate-fade-in-up" style={{ animationDelay: `${0.4 + categoryIndex * 0.1}s` }}>
             <AccordionTrigger 
               className="px-6 py-4 text-xl font-semibold text-primary-foreground hover:no-underline rounded-lg shadow-md hover:shadow-lg transition-shadow"
               style={{ backgroundColor: `hsl(${category.color})` }}
@@ -128,8 +129,10 @@ export function ToolSearchContainer() {
             </AccordionTrigger>
             <AccordionContent className="p-6 pt-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {category.tools.map((tool: Tool) => (
-                  <ToolCard key={tool.id} tool={tool} categoryColor={category.color} />
+                {category.tools.map((tool: Tool, toolIndex) => (
+                  <div key={tool.id} className="animate-fade-in-up" style={{ animationDelay: `${toolIndex * 0.05}s`}}>
+                    <ToolCard tool={tool} categoryColor={category.color} />
+                  </div>
                 ))}
               </div>
             </AccordionContent>
@@ -137,7 +140,7 @@ export function ToolSearchContainer() {
         ))}
       </Accordion>
       {filteredData.length === 0 && searchQuery && (
-         <div className="text-center py-16">
+         <div className="text-center py-16 animate-fade-in-up">
             <p className="text-xl font-semibold">No tools found for "{searchQuery}"</p>
             <p className="text-muted-foreground mt-2">Try searching for something else or check your spelling.</p>
         </div>

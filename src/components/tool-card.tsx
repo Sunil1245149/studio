@@ -21,14 +21,14 @@ export function ToolCard({ tool, categoryColor }: ToolCardProps) {
   return (
     <Link href={tool.link} className="group block">
       <Card
-        className="h-full transition-all duration-300 ease-in-out hover:shadow-xl hover:border-category-color/60 hover:-translate-y-1.5 border-2 border-transparent"
+        className="h-full transition-all duration-300 ease-in-out hover:shadow-2xl hover:border-category-color/60 hover:-translate-y-2 border-2 border-transparent"
         style={cardStyle}
       >
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-base font-semibold">
             {tool.name[language] || tool.name['en']}
           </CardTitle>
-          <div className="p-2 bg-secondary rounded-lg group-hover:bg-category-color group-hover:text-primary-foreground transition-colors">
+          <div className="p-2 bg-secondary rounded-lg group-hover:bg-category-color group-hover:text-primary-foreground transition-colors duration-300 group-hover:scale-110 group-hover:rotate-12">
             <tool.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
           </div>
         </CardHeader>
@@ -36,9 +36,9 @@ export function ToolCard({ tool, categoryColor }: ToolCardProps) {
           <p className="text-sm text-muted-foreground line-clamp-2 min-h-[40px]">
             {tool.description[language] || tool.description['en']}
           </p>
-          <div className="flex items-center text-sm text-category-color font-semibold mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="flex items-center text-sm text-category-color font-semibold mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <span>Use tool</span>
-            <ArrowRight className="ml-1 h-4 w-4" />
+            <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
         </CardContent>
       </Card>
