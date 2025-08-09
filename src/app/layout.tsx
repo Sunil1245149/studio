@@ -3,6 +3,9 @@ import './globals.css';
 import { LanguageProvider } from '@/contexts/language-context';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
+import { AppSidebar } from '@/components/app-sidebar';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 
 export const metadata: Metadata = {
@@ -27,8 +30,17 @@ export default function RootLayout({
       </head>
       <body className={cn('font-body antialiased')}>
         <LanguageProvider>
-            {children}
-            <Toaster />
+          <div className="flex min-h-screen">
+            <AppSidebar />
+            <div className="flex flex-col flex-1">
+              <Header />
+              <main className="flex-grow bg-muted/40">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </div>
+          <Toaster />
         </LanguageProvider>
       </body>
     </html>
