@@ -10,10 +10,10 @@ import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
 const PdfToTextInputSchema = z.object({
-  pdfDataUri: z
+  pdfBase64: z
     .string()
     .describe(
-      "A PDF file as a data URI that must include a MIME type of 'application/pdf' and use Base64 encoding. Expected format: 'data:application/pdf;base64,<encoded_data>'."
+      "A PDF file as a Base64-encoded string, without the data URI prefix."
     ),
 });
 export type PdfToTextInput = z.infer<typeof PdfToTextInputSchema>;
@@ -33,7 +33,7 @@ const prompt = ai.definePrompt({
   output: { schema: PdfToTextOutputSchema },
   prompt: `Extract all the text from the following PDF document.
 
-PDF: {{media url=pdfDataUri}}`,
+PDF: {{media url="data:application/pdf;base64,{{{pdfBase64}}}"}}`,
 });
 
 const pdfToTextFlow = ai.defineFlow(

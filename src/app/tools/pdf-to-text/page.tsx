@@ -13,6 +13,20 @@ import { useToast } from '@/hooks/use-toast';
 import { pdfToText } from '@/ai/flows/pdf-to-text-flow';
 import { Textarea } from '@/components/ui/textarea';
 
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        // remove the data URI prefix
+        const base64 = (reader.result as string).split(',')[1];
+        resolve(base64);
+    }
+    reader.onerror = (error) => reject(error);
+  });
+}
+
+
 export default function PdfToTextPage() {
   const [sourcePdf, setSourcePdf] = useState<File | null>(null);
   const [extractedText, setExtractedText] = useState<string>('');
@@ -47,32 +61,19 @@ export default function PdfToTextPage() {
     setIsLoading(true);
     setExtractedText('');
 
-    const reader = new FileReader();
-    reader.readAsDataURL(sourcePdf);
-    reader.onload = async (event) => {
-        const dataUri = event.target?.result as string;
-
-        try {
-            const result = await pdfToText({ pdfDataUri: dataUri });
-            setExtractedText(result.text);
-        } catch (error) {
-            console.error('Error extracting text from PDF:', error);
-            toast({
-                title: 'Extraction Failed',
-                description: 'An error occurred during text extraction.',
-                variant: 'destructive',
-            });
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    reader.onerror = () => {
-        setIsLoading(false);
+    try {
+        const base64Pdf = await fileToBase64(sourcePdf);
+        const result = await pdfToText({ pdfBase64: base64Pdf });
+        setExtractedText(result.text);
+    } catch (error) {
+        console.error('Error extracting text from PDF:', error);
         toast({
-            title: 'File Read Error',
-            description: 'Could not read the selected file.',
+            title: 'Extraction Failed',
+            description: 'An error occurred during text extraction. Please try again.',
             variant: 'destructive',
         });
+    } finally {
+        setIsLoading(false);
     }
   };
   
