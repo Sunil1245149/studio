@@ -1,30 +1,62 @@
-body {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    color: #000;
-    background-color: #fff;
-    line-height: 1.5;
-    font-size: 10pt;
-}
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        margin: 0;
+        font-family: sans-serif;
+    }
 
-.space-y-6 > :not([hidden]) ~ :not([hidden]) {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-}
+    @page {
+        size: A4;
+        margin: 20mm;
+    }
 
-.text-center { text-align: center; }
-.text-3xl { font-size: 1.875rem; }
-.font-bold { font-weight: 700; }
-.text-muted-foreground { color: #555; }
-.text-lg { font-size: 1.125rem; }
-.border-b-2 { border-bottom-width: 2px; }
-.border-black { border-color: #000; }
-.pb-1 { padding-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-4 { margin-bottom: 1rem; }
-.italic { font-style: italic; }
-.mt-1 { margin-top: 0.25rem; }
+    .template-classic, .template-modern, .template-minimalist {
+        color: #000 !important;
+    }
+    
+    /* Classic Template Print Styles */
+    .template-classic h1, .template-classic h2, .template-classic h3 {
+        color: #000 !important;
+    }
+    .template-classic .text-muted-foreground {
+        color: #555 !important;
+    }
+     .template-classic .border-b-2 {
+        border-color: #000 !important;
+    }
 
-@page {
-    size: A4;
-    margin: 2cm;
+    /* Modern Template Print Styles */
+    .template-modern .bg-gray-700 {
+        background-color: #374151 !important;
+    }
+     .template-modern .text-white {
+        color: #fff !important;
+    }
+    .template-modern .border-white\/50 {
+        border-color: rgba(255,255,255,0.5) !important;
+    }
+    .template-modern .text-gray-800 {
+        color: #1f2937 !important;
+    }
+     .template-modern .text-gray-600 {
+        color: #4b5563 !important;
+    }
+    .template-modern .text-gray-700 {
+        color: #374151 !important;
+    }
+    .template-modern .border-gray-300 {
+        border-color: #d1d5db !important;
+    }
+
+    /* Minimalist Template Print Styles */
+    .template-minimalist {
+        font-family: 'Garamond', 'Times New Roman', serif;
+    }
+     .template-minimalist .text-gray-500 {
+        color: #6b7280 !important;
+    }
+     .template-minimalist .border-b {
+        border-color: #000 !important;
+    }
 }

@@ -15,6 +15,9 @@ import { Footer } from '@/components/footer';
 import Link from 'next/link';
 import { ArrowLeft, PlusCircle, Trash2, Printer, Eye } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
+import Head from 'next/head';
 
 const experienceSchema = z.object({
   jobTitle: z.string().min(1, 'Job title is required'),
@@ -42,9 +45,17 @@ const formSchema = z.object({
 });
 
 type ResumeFormValues = z.infer<typeof formSchema>;
+type Template = 'classic' | 'modern' | 'minimalist';
+
+const templates: { id: Template; name: string }[] = [
+    { id: 'classic', name: 'Classic Professional' },
+    { id: 'modern', name: 'Modern Two-Column' },
+    { id: 'minimalist', name: 'Clean & Minimalist' },
+];
 
 export default function ResumeBuilderPage() {
   const [resumeData, setResumeData] = useState<ResumeFormValues | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<Template>('classic');
 
   const form = useForm<ResumeFormValues>({
     resolver: zodResolver(formSchema),
@@ -90,7 +101,6 @@ export default function ResumeBuilderPage() {
         printWindow.document.close();
         printWindow.focus();
         
-        // Wait for styles to load before printing
         setTimeout(() => {
             printWindow.print();
             printWindow.close();
@@ -98,8 +108,165 @@ export default function ResumeBuilderPage() {
     }
   }
 
+  const ResumePreview = ({ data, template }: { data: ResumeFormValues, template: Template }) => {
+    switch (template) {
+        case 'modern':
+            return (
+                <div className="flex text-sm">
+                    <div className="w-1/3 bg-gray-700 text-white p-6">
+                        <h1 className="text-2xl font-bold text-white">{data.fullName}</h1>
+                        <Separator className="my-4 bg-white/50"/>
+                        <div className="space-y-3">
+                            <h2 className="text-base font-bold uppercase tracking-wider text-white border-b border-white/50 pb-1">Contact</h2>
+                            <p>{data.email}</p>
+                            <p>{data.phoneNumber}</p>
+                            <p>{data.address}</p>
+                        </div>
+                         {data.skills && (
+                            <div className="mt-6 space-y-3">
+                                <h2 className="text-base font-bold uppercase tracking-wider text-white border-b border-white/50 pb-1">Skills</h2>
+                                <ul className="list-disc list-inside">
+                                    {data.skills.split(',').map(s => <li key={s.trim()}>{s.trim()}</li>)}
+                                </ul>
+                            </div>
+                        )}
+                        {data.educations[0]?.degree && (
+                            <div className="mt-6 space-y-3">
+                                <h2 className="text-base font-bold uppercase tracking-wider text-white border-b border-white/50 pb-1">Education</h2>
+                                {data.educations.map((edu, i) => (
+                                    <div key={i} className="mb-2">
+                                        <h3 className="font-bold">{edu.degree}</h3>
+                                        <p className="text-xs">{edu.institution}</p>
+                                        <p className="text-xs">{edu.year}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <div className="w-2/3 p-6 space-y-6">
+                        {data.summary && (
+                            <div>
+                                <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-300 pb-1 mb-2">Summary</h2>
+                                <p>{data.summary}</p>
+                            </div>
+                        )}
+                         {data.experiences[0]?.jobTitle && (
+                            <div>
+                                <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-300 pb-1 mb-2">Work Experience</h2>
+                                {data.experiences.map((exp, i) => (
+                                    <div key={i} className="mb-4">
+                                        <h3 className="font-bold">{exp.jobTitle}</h3>
+                                        <p className="italic text-gray-600">{exp.company} | {exp.startDate} - {exp.endDate || 'Present'}</p>
+                                        <p className="mt-1 text-gray-700">{exp.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        case 'minimalist':
+             return (
+                <div className="space-y-6 font-serif">
+                    <div className="text-center pb-4 border-b">
+                        <h1 className="text-4xl font-light tracking-widest uppercase">{data.fullName}</h1>
+                        <p className="text-xs text-gray-500 mt-2">{data.email} &bull; {data.phoneNumber} &bull; {data.address}</p>
+                    </div>
+                    {data.summary && (
+                        <div>
+                            <h2 className="text-sm font-semibold uppercase tracking-wider text-center mb-2">Profile</h2>
+                            <p className="text-center">{data.summary}</p>
+                        </div>
+                    )}
+                    {data.experiences[0]?.jobTitle && (
+                        <div>
+                            <h2 className="text-sm font-semibold uppercase tracking-wider text-center mb-4">Experience</h2>
+                             {data.experiences.map((exp, i) => (
+                                <div key={i} className="mb-4">
+                                    <h3 className="font-bold text-center">{exp.jobTitle}</h3>
+                                    <p className="text-sm italic text-center text-gray-600">{exp.company} | {exp.startDate} - {exp.endDate || 'Present'}</p>
+                                    <p className="mt-1 text-sm text-center">{exp.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    <div className="grid grid-cols-2 gap-8">
+                        {data.educations[0]?.degree && (
+                            <div>
+                                <h2 className="text-sm font-semibold uppercase tracking-wider text-center mb-2">Education</h2>
+                                {data.educations.map((edu, i) => (
+                                    <div key={i} className="mb-2 text-center">
+                                        <h3 className="font-bold">{edu.degree}</h3>
+                                        <p className="text-sm">{edu.institution} - {edu.year}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        {data.skills && (
+                            <div>
+                                <h2 className="text-sm font-semibold uppercase tracking-wider text-center mb-2">Skills</h2>
+                                <p className="text-center">{data.skills}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+             );
+        default: // classic
+            return (
+                <div className="space-y-6 text-sm">
+                    <div className="text-center">
+                        <h1 className="text-3xl font-bold">{data.fullName}</h1>
+                        <p className="text-muted-foreground">{data.email} | {data.phoneNumber} | {data.address}</p>
+                    </div>
+                    
+                    {data.summary && (
+                        <div>
+                            <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Summary</h2>
+                            <p>{data.summary}</p>
+                        </div>
+                    )}
+
+                    {data.experiences[0]?.jobTitle && (
+                        <div>
+                            <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Work Experience</h2>
+                            {data.experiences.map((exp, i) => (
+                                <div key={i} className="mb-4">
+                                    <h3 className="font-bold">{exp.jobTitle}</h3>
+                                    <p className="italic">{exp.company} | {exp.startDate} - {exp.endDate || 'Present'}</p>
+                                    <p className="mt-1">{exp.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    {data.educations[0]?.degree && (
+                        <div>
+                            <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Education</h2>
+                            {data.educations.map((edu, i) => (
+                                <div key={i} className="mb-2">
+                                    <h3 className="font-bold">{edu.degree}</h3>
+                                    <p>{edu.institution} - {edu.year}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    {data.skills && (
+                        <div>
+                            <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Skills</h2>
+                            <p>{data.skills}</p>
+                        </div>
+                    )}
+                </div>
+            )
+    }
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
+      <Head>
+        <link rel="stylesheet" href="/resume-print.css" media="print" />
+      </Head>
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-4">
@@ -119,6 +286,21 @@ export default function ResumeBuilderPage() {
             <CardContent>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                  {/* Template Selector */}
+                   <div>
+                        <Label>Select Template</Label>
+                        <Select value={selectedTemplate} onValueChange={(v) => setSelectedTemplate(v as Template)}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Choose a resume template" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {templates.map(t => (
+                                    <SelectItem key={t.id} value={t.id}>{t.name}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                  <Separator />
                   {/* Personal Details */}
                   <div className="space-y-4">
                     <h3 className="text-lg font-semibold">Personal Details</h3>
@@ -219,56 +401,12 @@ export default function ResumeBuilderPage() {
                     {resumeData && <Button onClick={handlePrint}><Printer className="mr-2 h-4 w-4" /> Print</Button>}
                 </CardHeader>
                 <CardContent>
-                    <div id="resume-preview" className="p-8 border rounded-lg bg-white text-black min-h-[50rem] text-sm">
+                    <div id="resume-preview" className={cn("p-8 border rounded-lg bg-white text-black min-h-[50rem]", `template-${selectedTemplate}`)}>
                         {resumeData ? (
-                            <div className="space-y-6">
-                                <div className="text-center">
-                                    <h1 className="text-3xl font-bold">{resumeData.fullName}</h1>
-                                    <p className="text-muted-foreground">{resumeData.email} | {resumeData.phoneNumber} | {resumeData.address}</p>
-                                </div>
-                                
-                                {resumeData.summary && (
-                                    <div>
-                                        <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Summary</h2>
-                                        <p>{resumeData.summary}</p>
-                                    </div>
-                                )}
-
-                                {resumeData.experiences[0]?.jobTitle && (
-                                    <div>
-                                        <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Work Experience</h2>
-                                        {resumeData.experiences.map((exp, i) => (
-                                            <div key={i} className="mb-4">
-                                                <h3 className="font-bold">{exp.jobTitle}</h3>
-                                                <p className="italic">{exp.company} | {exp.startDate} - {exp.endDate || 'Present'}</p>
-                                                <p className="mt-1">{exp.description}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {resumeData.educations[0]?.degree && (
-                                    <div>
-                                        <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Education</h2>
-                                        {resumeData.educations.map((edu, i) => (
-                                            <div key={i} className="mb-2">
-                                                <h3 className="font-bold">{edu.degree}</h3>
-                                                <p>{edu.institution} - {edu.year}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {resumeData.skills && (
-                                    <div>
-                                        <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Skills</h2>
-                                        <p>{resumeData.skills}</p>
-                                    </div>
-                                )}
-                            </div>
+                            <ResumePreview data={resumeData} template={selectedTemplate} />
                         ) : (
                             <div className="flex items-center justify-center text-center text-muted-foreground min-h-[40rem]">
-                                <p>Fill out the form to see your resume preview.</p>
+                                <p>Fill out the form and click "Preview Resume" to see your document here.</p>
                             </div>
                         )}
                     </div>
