@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Search, Loader2 } from 'lucide-react';
+import { Search, Loader2, Sparkles } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -81,11 +81,11 @@ export function ToolSearchContainer() {
             <Input
             {...register('query')}
             placeholder={t('searchPlaceholder')}
-            className="pl-10 text-base"
+            className="pl-10 text-base py-6 rounded-full"
             onChange={(e) => setSearchQuery(e.target.value)}
             />
         </div>
-        <Button type="submit" variant="default" disabled={isAiLoading}>
+        <Button type="submit" variant="default" disabled={isAiLoading} className="rounded-full">
           {isAiLoading ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
@@ -98,9 +98,12 @@ export function ToolSearchContainer() {
       {isAiLoading && <p className="text-center text-muted-foreground">{t('aiLoading')}</p>}
 
       {aiSuggestions.length > 0 && (
-        <Card className="max-w-2xl mx-auto">
+        <Card className="max-w-2xl mx-auto bg-primary/10 border-primary/20">
           <CardHeader>
-            <CardTitle className="text-base font-medium">{t('aiSuggestionsTitle')}</CardTitle>
+            <CardTitle className="text-base font-medium flex items-center gap-2">
+                <Sparkles className="text-primary"/>
+                {t('aiSuggestionsTitle')}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
@@ -116,11 +119,11 @@ export function ToolSearchContainer() {
 
       <Accordion type="multiple" defaultValue={defaultActiveAccordionItems} className="w-full space-y-4">
         {filteredData.map(category => (
-          <AccordionItem value={category.id} key={category.id} id={category.id} className="border rounded-lg bg-card/50 overflow-hidden">
-            <AccordionTrigger className="px-6 py-4 text-xl font-semibold hover:no-underline">
+          <AccordionItem value={category.id} key={category.id} id={category.id} className="border-none">
+            <AccordionTrigger className="px-6 py-4 text-xl font-semibold hover:no-underline bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow">
               {category.name[language] || category.name['en']}
             </AccordionTrigger>
-            <AccordionContent className="p-6 pt-0">
+            <AccordionContent className="p-6 pt-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {category.tools.map((tool: Tool) => (
                   <ToolCard key={tool.id} tool={tool} />
