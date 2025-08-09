@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 
 export const metadata: Metadata = {
-  title: 'Tools Hub Express',
+  title: 'Tools Hub Pro',
   description: 'Over 200+ tools to make your life easier.',
 };
 

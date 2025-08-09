@@ -2,9 +2,9 @@ import type { Language } from "@/contexts/language-context";
 
 export const translations = {
   title: {
-    en: "Tools Hub",
-    hi: "टूल्स हब",
-    mr: "टूल्स हब",
+    en: "Tools Hub Pro",
+    hi: "टूल्स हब प्रो",
+    mr: "टूल्स हब प्रो",
   },
   searchPlaceholder: {
     en: "Search for a tool...",
@@ -52,9 +52,9 @@ export const translations = {
     mr: "संपर्क",
   },
   footerCopyright: {
-    en: `© ${new Date().getFullYear()} Tools Hub Express. All Rights Reserved.`,
-    hi: `© ${new Date().getFullYear()} टूल्स हब एक्सप्रेस. सर्वाधिकार सुरक्षित.`,
-    mr: `© ${new Date().getFullYear()} टूल्स हब एक्सप्रेस. सर्व हक्क राखीव.`,
+    en: `© ${new Date().getFullYear()} Tools Hub Pro. All Rights Reserved.`,
+    hi: `© ${new Date().getFullYear()} टूल्स हब प्रो. सर्वाधिकार सुरक्षित.`,
+    mr: `© ${new Date().getFullYear()} टूल्स हब प्रो. सर्व हक्क राखीव.`,
   },
   aiSuggestionsTitle: {
     en: "Not finding what you need? Try searching for:",

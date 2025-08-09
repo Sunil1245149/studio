@@ -146,7 +146,7 @@ export default function BiodataMakerPage() {
         </div>
       </div>
        <p className="text-center text-sm text-muted-foreground mt-8">
-        This biodata was generated using Tools Hub Express.
+        This biodata was generated using Tools Hub Pro.
       </p>
     </div>
   )
