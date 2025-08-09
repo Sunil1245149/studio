@@ -13,7 +13,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { ToolCard } from './tool-card';
-import { toolsData, Tool } from '@/lib/tools-data';
+import { toolsData, Tool, ToolCategory } from '@/lib/tools-data';
 import { useLanguage } from '@/contexts/language-context';
 import { suggestAlternativeSearches } from '@/ai/flows/search-assistant';
 import { Badge } from './ui/badge';
@@ -118,15 +118,18 @@ export function ToolSearchContainer() {
       )}
 
       <Accordion type="multiple" defaultValue={defaultActiveAccordionItems} className="w-full space-y-4">
-        {filteredData.map(category => (
+        {filteredData.map((category: ToolCategory) => (
           <AccordionItem value={category.id} key={category.id} id={category.id} className="border-none">
-            <AccordionTrigger className="px-6 py-4 text-xl font-semibold hover:no-underline bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              {category.name[language] || category.name['en']}
+            <AccordionTrigger 
+              className="px-6 py-4 text-xl font-semibold text-primary-foreground hover:no-underline rounded-lg shadow-md hover:shadow-lg transition-shadow"
+              style={{ backgroundColor: `hsl(${category.color})` }}
+            >
+              <span className="text-primary-foreground">{category.name[language] || category.name['en']}</span>
             </AccordionTrigger>
             <AccordionContent className="p-6 pt-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {category.tools.map((tool: Tool) => (
-                  <ToolCard key={tool.id} tool={tool} />
+                  <ToolCard key={tool.id} tool={tool} categoryColor={category.color} />
                 ))}
               </div>
             </AccordionContent>
