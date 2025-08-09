@@ -41,7 +41,7 @@ export const toolsData: ToolCategory[] = [
     tools: [
       { id: "tool-1", name: { en: "Simple Calculator", hi: "सरल कैलकुलेटर", mr: "साधे गणक" }, description: { en: "A basic arithmetic calculator.", hi: "एक बुनियादी अंकगणितीय कैलकुलेटर।", mr: "एक मूलभूत अंकगणितीय गणक." }, icon: Calculator, link: "/tools/calculator" },
       { id: "tool-2", name: { en: "Percentage Calculator", hi: "प्रतिशत कैलकुलेटर", mr: "टक्केवारी गणक" }, description: { en: "Calculate percentages with ease.", hi: "आसानी से प्रतिशत की गणना करें।", mr: "सहजतेने टक्केवारीची गणना करा." }, icon: Percent, link: "/tools/percentage-calculator" },
-      { id: "tool-3", name: { en: "Scientific Calculator", hi: "वैज्ञानिक कैलकुलेटर", mr: "वैज्ञानिक गणक" }, description: { en: "Advanced calculations and functions.", hi: "उन्नत गणना और कार्य।", mr: "प्रगत गणना आणि कार्ये." }, icon: Sigma, link: "/tools/scientific-calculator" },
+      { id: "tool-3", name: { en: "Scientific Calculator", hi: "वैज्ञानिक कैलकुलेटर", mr: "वैज्ञानिक गणरेटर" }, description: { en: "Advanced calculations and functions.", hi: "उन्नत गणना और कार्य।", mr: "प्रगत गणना आणि कार्ये." }, icon: Sigma, link: "/tools/scientific-calculator" },
     ],
   },
   {
@@ -65,7 +65,7 @@ export const toolsData: ToolCategory[] = [
       mr: "जनरेटर",
     },
     tools: [
-      { id: "tool-7", name: { en: "Color Palette Generator", hi: "रंग पैलेट जेनरेटर", mr: "रंग पॅलेट जनरेटर" }, description: { en: "Create beautiful color schemes.", hi: "सुंदर रंग योजनाएं बनाएं।", mr: "सुंदर रंग योजना तयार करा." }, icon: Palette, link: "#" },
+      { id: "tool-7", name: { en: "Color Palette Generator", hi: "रंग पैलेट जेनरेटर", mr: "रंग पॅलेट जनरेटर" }, description: { en: "Create beautiful color schemes.", hi: "सुंदर रंग योजनाएं बनाएं।", mr: "सुंदर रंग योजना तयार करा." }, icon: Palette, link: "/tools/color-palette-generator" },
       { id: "tool-8", name: { en: "Password Generator", hi: "पासवर्ड जेनरेटर", mr: "पासवर्ड जनरेटर" }, description: { en: "Generate strong, secure passwords.", hi: "मजबूत, सुरक्षित पासवर्ड बनाएं।", mr: "मजबूत, सुरक्षित पासवर्ड तयार करा." }, icon: KeyRound, link: "#" },
       { id: "tool-9", name: { en: "Privacy Policy Generator", hi: "गोपनीयता नीति जेनरेटर", mr: "गोपनीयता धोरण जनरेटर" }, description: { en: "Create a privacy policy for your site.", hi: "अपनी साइट के लिए गोपनीयता नीति बनाएं।", mr: "आपल्या साइटसाठी गोपनीयता धोरण तयार करा." }, icon: Shield, link: "#" },
     ],
