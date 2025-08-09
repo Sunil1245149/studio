@@ -40,7 +40,7 @@ export const toolsData: ToolCategory[] = [
     },
     tools: [
       { id: "tool-1", name: { en: "Simple Calculator", hi: "सरल कैलकुलेटर", mr: "साधे गणक" }, description: { en: "A basic arithmetic calculator.", hi: "एक बुनियादी अंकगणितीय कैलकुलेटर।", mr: "एक मूलभूत अंकगणितीय गणक." }, icon: Calculator, link: "/tools/calculator" },
-      { id: "tool-2", name: { en: "Percentage Calculator", hi: "प्रतिशत कैलकुलेटर", mr: "टक्केवारी गणक" }, description: { en: "Calculate percentages with ease.", hi: "आसानी से प्रतिशत की गणना करें।", mr: "सहजतेने टक्केवारीची गणना करा." }, icon: Percent, link: "#" },
+      { id: "tool-2", name: { en: "Percentage Calculator", hi: "प्रतिशत कैलकुलेटर", mr: "टक्केवारी गणक" }, description: { en: "Calculate percentages with ease.", hi: "आसानी से प्रतिशत की गणना करें।", mr: "सहजतेने टक्केवारीची गणना करा." }, icon: Percent, link: "/tools/percentage-calculator" },
       { id: "tool-3", name: { en: "Scientific Calculator", hi: "वैज्ञानिक कैलकुलेटर", mr: "वैज्ञानिक गणक" }, description: { en: "Advanced calculations and functions.", hi: "उन्नत गणना और कार्य।", mr: "प्रगत गणना आणि कार्ये." }, icon: Sigma, link: "#" },
     ],
   },
