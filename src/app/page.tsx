@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 export default function Home() {
   return (
-    <div className={cn("container mx-auto px-4 py-8")}>
+    <div className={cn("space-y-8")}>
       <ToolSearchContainer />
     </div>
   );
