@@ -15,6 +15,8 @@ import {
   CaseSensitive,
   FileJson,
   File,
+  ClipboardList,
+  User,
 } from 'lucide-react';
 
 export interface Tool {
@@ -73,6 +75,19 @@ export const toolsData: ToolCategory[] = [
       { id: "tool-7", name: { en: "Color Palette Generator", hi: "रंग पैलेट जेनरेटर", mr: "रंग पॅलेट जनरेटर" }, description: { en: "Create beautiful color schemes.", hi: "सुंदर रंग योजनाएं बनाएं।", mr: "सुंदर रंग योजना तयार करा." }, icon: Palette, link: "/tools/color-palette-generator" },
       { id: "tool-8", name: { en: "Password Generator", hi: "पासवर्ड जेनरेटर", mr: "पासवर्ड जनरेटर" }, description: { en: "Generate strong, secure passwords.", hi: "मजबूत, सुरक्षित पासवर्ड बनाएं।", mr: "मजबूत, सुरक्षित पासवर्ड तयार करा." }, icon: KeyRound, link: "/tools/password-generator" },
       { id: "tool-9", name: { en: "Privacy Policy Generator", hi: "गोपनीयता नीति जेनरेटर", mr: "गोपनीयता धोरण जनरेटर" }, description: { en: "Create a privacy policy for your site.", hi: "अपनी साइट के लिए गोपनीयता नीति बनाएं।", mr: "आपल्या साइटसाठी गोपनीयता धोरण तयार करा." }, icon: Shield, link: "/tools/privacy-policy-generator" },
+    ],
+  },
+   {
+    id: "build",
+    name: {
+      en: "Build",
+      hi: "बनाएं",
+      mr: "तयार करा",
+    },
+    color: '45 85% 60%', // Yellow
+    tools: [
+      { id: "tool-14", name: { en: "Resume Builder", hi: "रिज्यूमे बिल्डर", mr: "बायोडेटा बिल्डर" }, description: { en: "Create a professional resume.", hi: "एक पेशेवर रिज्यूमे बनाएं।", mr: "एक व्यावसायिक बायोडेटा तयार करा." }, icon: ClipboardList, link: "/tools/resume-builder" },
+      { id: "tool-15", name: { en: "Biodata Maker", hi: "बायोडाटा मेकर", mr: "बायोडाटा मेकर" }, description: { en: "Generate a biodata for marriage or jobs.", hi: "शादी या नौकरियों के लिए बायोडाटा बनाएं।", mr: "लग्न किंवा नोकरीसाठी बायोडाटा तयार करा." }, icon: User, link: "/tools/biodata-maker" },
     ],
   },
   {
