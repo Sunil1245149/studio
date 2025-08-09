@@ -6,11 +6,11 @@ import { Github, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export function Footer() {
+export function Footer({className}: {className?: string}) {
   const { t, language } = useLanguage();
 
   return (
-    <footer className={cn("text-foreground", "animated-background")}>
+    <footer className={cn("text-foreground", "animated-background", className)}>
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
