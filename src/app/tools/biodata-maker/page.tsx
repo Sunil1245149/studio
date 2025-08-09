@@ -25,6 +25,9 @@ const formSchema = z.object({
   height: z.string().min(1, 'Height is required'),
   religion: z.string().min(1, 'Religion is required'),
   caste: z.string(),
+  gotra: z.string(),
+  rashi: z.string(),
+  hobbies: z.string(),
   education: z.string().min(1, 'Education is required'),
   occupation: z.string().min(1, 'Occupation is required'),
   address: z.string().min(1, 'Address is required'),
@@ -48,6 +51,9 @@ export default function BiodataMakerPage() {
       height: '',
       religion: '',
       caste: '',
+      gotra: '',
+      rashi: '',
+      hobbies: '',
       education: '',
       occupation: '',
       address: '',
@@ -110,6 +116,14 @@ export default function BiodataMakerPage() {
           <span className="font-semibold">Caste:</span>
           <span>{data.caste || 'N/A'}</span>
         </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-semibold">Gotra:</span>
+          <span>{data.gotra || 'N/A'}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-semibold">Rashi:</span>
+          <span>{data.rashi || 'N/A'}</span>
+        </div>
          <div className="flex justify-between border-b pb-2">
           <span className="font-semibold">Education:</span>
           <span>{data.education}</span>
@@ -117,6 +131,10 @@ export default function BiodataMakerPage() {
          <div className="flex justify-between border-b pb-2">
           <span className="font-semibold">Occupation:</span>
           <span>{data.occupation}</span>
+        </div>
+         <div className="flex justify-between border-b pb-2">
+          <span className="font-semibold">Hobbies:</span>
+          <span>{data.hobbies || 'N/A'}</span>
         </div>
          <div className="flex justify-between border-b pb-2 col-span-1 md:col-span-2">
           <span className="font-semibold">Address:</span>
@@ -185,6 +203,17 @@ export default function BiodataMakerPage() {
                         <FormItem><FormLabel>Caste (Optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
                   </div>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <FormField control={form.control} name="gotra" render={({ field }) => (
+                        <FormItem><FormLabel>Gotra (Optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                    )} />
+                    <FormField control={form.control} name="rashi" render={({ field }) => (
+                        <FormItem><FormLabel>Rashi (Zodiac - Optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                    )} />
+                  </div>
+                   <FormField control={form.control} name="hobbies" render={({ field }) => (
+                    <FormItem><FormLabel>Hobbies (Optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                  )} />
                    <Separator/>
                    <h3 className="text-lg font-semibold">Education & Career</h3>
                      <FormField control={form.control} name="education" render={({ field }) => (

@@ -34,14 +34,22 @@ const educationSchema = z.object({
   year: z.string().min(1, 'Year is required'),
 });
 
+const projectSchema = z.object({
+  name: z.string().min(1, "Project name is required"),
+  description: z.string().min(1, "Project description is required"),
+  url: z.string().url().optional().or(z.literal('')),
+});
+
 const formSchema = z.object({
   fullName: z.string().min(2, 'Full name is required.'),
   email: z.string().email('Please enter a valid email address.'),
   phoneNumber: z.string().min(10, 'Please enter a valid phone number.'),
   address: z.string(),
   summary: z.string(),
+  links: z.string().optional(),
   experiences: z.array(experienceSchema),
   educations: z.array(educationSchema),
+  projects: z.array(projectSchema),
   skills: z.string(),
 });
 
@@ -66,8 +74,10 @@ export default function ResumeBuilderPage() {
       phoneNumber: '',
       address: '',
       summary: '',
+      links: '',
       experiences: [{ jobTitle: '', company: '', startDate: '', endDate: '', description: '' }],
       educations: [{ degree: '', institution: '', year: '' }],
+      projects: [{ name: '', description: '', url: '' }],
       skills: '',
     },
   });
@@ -80,6 +90,11 @@ export default function ResumeBuilderPage() {
   const { fields: educationFields, append: appendEducation, remove: removeEducation } = useFieldArray({
     control: form.control,
     name: 'educations',
+  });
+
+  const { fields: projectFields, append: appendProject, remove: removeProject } = useFieldArray({
+    control: form.control,
+    name: "projects",
   });
 
   const onSubmit: SubmitHandler<ResumeFormValues> = (data) => {
@@ -110,6 +125,8 @@ export default function ResumeBuilderPage() {
   }
 
   const ResumePreview = ({ data, template }: { data: ResumeFormValues, template: Template }) => {
+    const linksArray = data.links?.split(',').map(link => link.trim()).filter(link => link);
+    
     switch (template) {
         case 'modern':
             return (
@@ -122,6 +139,11 @@ export default function ResumeBuilderPage() {
                             <p>{data.email}</p>
                             <p>{data.phoneNumber}</p>
                             <p>{data.address}</p>
+                            {linksArray && linksArray.length > 0 && (
+                              <div className="space-y-1">
+                                {linksArray.map((link, i) => <p key={i}><a href={link} className="underline">{link}</a></p>)}
+                              </div>
+                            )}
                         </div>
                          {data.skills && (
                             <div className="mt-6 space-y-3">
@@ -163,6 +185,18 @@ export default function ResumeBuilderPage() {
                                 ))}
                             </div>
                         )}
+                        {data.projects[0]?.name && (
+                           <div>
+                                <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-300 pb-1 mb-2">Projects</h2>
+                                {data.projects.map((proj, i) => (
+                                    <div key={i} className="mb-4">
+                                        <h3 className="font-bold">{proj.name}</h3>
+                                        {proj.url && <a href={proj.url} className="text-xs italic text-gray-600 underline">{proj.url}</a>}
+                                        <p className="mt-1">{proj.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             );
@@ -172,6 +206,11 @@ export default function ResumeBuilderPage() {
                     <div className="text-center pb-4 border-b">
                         <h1 className="text-4xl font-light tracking-widest uppercase">{data.fullName}</h1>
                         <p className="text-xs text-gray-500 mt-2">{data.email} &bull; {data.phoneNumber} &bull; {data.address}</p>
+                        {linksArray && linksArray.length > 0 && (
+                          <div className="flex justify-center gap-4 text-xs text-gray-500 mt-1">
+                            {linksArray.map((link, i) => <a key={i} href={link} className="underline">{link}</a>)}
+                          </div>
+                        )}
                     </div>
                     {data.summary && (
                         <div>
@@ -187,6 +226,18 @@ export default function ResumeBuilderPage() {
                                     <h3 className="font-bold text-center">{exp.jobTitle}</h3>
                                     <p className="text-sm italic text-center text-gray-600">{exp.company} | {exp.startDate} - {exp.endDate || 'Present'}</p>
                                     <p className="mt-1 text-sm text-center">{exp.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    {data.projects[0]?.name && (
+                       <div>
+                            <h2 className="text-sm font-semibold uppercase tracking-wider text-center mb-4">Projects</h2>
+                            {data.projects.map((proj, i) => (
+                                <div key={i} className="mb-4">
+                                    <h3 className="font-bold text-center">{proj.name}</h3>
+                                    {proj.url && <a href={proj.url} className="text-xs italic text-center text-gray-600 underline block">{proj.url}</a>}
+                                    <p className="mt-1 text-sm text-center">{proj.description}</p>
                                 </div>
                             ))}
                         </div>
@@ -218,6 +269,11 @@ export default function ResumeBuilderPage() {
                     <div className="text-center">
                         <h1 className="text-3xl font-bold">{data.fullName}</h1>
                         <p className="text-muted-foreground">{data.email} | {data.phoneNumber} | {data.address}</p>
+                        {linksArray && linksArray.length > 0 && (
+                          <div className="flex justify-center gap-4 text-muted-foreground mt-1">
+                            {linksArray.map((link, i) => <a key={i} href={link} className="underline">{link}</a>)}
+                          </div>
+                        )}
                     </div>
                     
                     {data.summary && (
@@ -235,6 +291,20 @@ export default function ResumeBuilderPage() {
                                     <h3 className="font-bold">{exp.jobTitle}</h3>
                                     <p className="italic">{exp.company} | {exp.startDate} - {exp.endDate || 'Present'}</p>
                                     <p className="mt-1">{exp.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                     {data.projects[0]?.name && (
+                       <div>
+                            <h2 className="text-lg font-bold border-b-2 border-black pb-1 mb-2">Projects</h2>
+                            {data.projects.map((proj, i) => (
+                                <div key={i} className="mb-4">
+                                    <div className="flex justify-between items-baseline">
+                                        <h3 className="font-bold">{proj.name}</h3>
+                                        {proj.url && <a href={proj.url} className="italic underline">{proj.url}</a>}
+                                    </div>
+                                    <p className="mt-1">{proj.description}</p>
                                 </div>
                             ))}
                         </div>
@@ -319,6 +389,9 @@ export default function ResumeBuilderPage() {
                     <FormField control={form.control} name="address" render={({ field }) => (
                       <FormItem><FormLabel>Address</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
+                     <FormField control={form.control} name="links" render={({ field }) => (
+                      <FormItem><FormLabel>Links (LinkedIn, GitHub, Portfolio - comma separated)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                    )} />
                     <FormField control={form.control} name="summary" render={({ field }) => (
                       <FormItem><FormLabel>Professional Summary</FormLabel><FormControl><Textarea {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
@@ -351,6 +424,27 @@ export default function ResumeBuilderPage() {
                       </div>
                     ))}
                     <Button type="button" variant="outline" size="sm" onClick={() => appendExperience({ jobTitle: '', company: '', startDate: '', endDate: '', description: '' })}><PlusCircle className="mr-2 h-4 w-4" /> Add Experience</Button>
+                  </div>
+                  <Separator />
+
+                  {/* Projects */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Projects</h3>
+                    {projectFields.map((field, index) => (
+                      <div key={field.id} className="p-4 border rounded-md space-y-4 relative">
+                        <FormField control={form.control} name={`projects.${index}.name`} render={({ field }) => (
+                          <FormItem><FormLabel>Project Name</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                        <FormField control={form.control} name={`projects.${index}.url`} render={({ field }) => (
+                          <FormItem><FormLabel>Project URL (Optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                        <FormField control={form.control} name={`projects.${index}.description`} render={({ field }) => (
+                          <FormItem><FormLabel>Project Description</FormLabel><FormControl><Textarea {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                        {index > 0 && <Button type="button" variant="destructive" size="icon" className="absolute top-2 right-2" onClick={() => removeProject(index)}><Trash2 className="h-4 w-4" /></Button>}
+                      </div>
+                    ))}
+                    <Button type="button" variant="outline" size="sm" onClick={() => appendProject({ name: '', description: '', url: '' })}><PlusCircle className="mr-2 h-4 w-4" /> Add Project</Button>
                   </div>
                   <Separator />
 
