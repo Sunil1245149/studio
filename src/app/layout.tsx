@@ -4,7 +4,6 @@ import './globals.css';
 import { LanguageProvider } from '@/contexts/language-context';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
-import { AppSidebar } from '@/components/app-sidebar';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
@@ -31,17 +30,14 @@ export default function RootLayout({
       </head>
       <body className={cn('font-body antialiased')}>
         <LanguageProvider>
-          <div className="flex min-h-screen">
-            <AppSidebar />
-            <div className="flex flex-col flex-1">
-              <Header />
-              <main className="flex-grow bg-muted/40 p-4 sm:p-6 md:p-8">
-                <div className="max-w-7xl mx-auto">
-                    {children}
-                </div>
-              </main>
-              <Footer />
-            </div>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow bg-muted/40 p-4 sm:p-6 md:p-8">
+              <div className="max-w-7xl mx-auto">
+                  {children}
+              </div>
+            </main>
+            <Footer />
           </div>
           <Toaster />
         </LanguageProvider>
