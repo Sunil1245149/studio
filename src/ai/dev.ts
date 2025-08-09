@@ -7,3 +7,4 @@ import '@/ai/schemas/text-to-speech-schemas.ts';
 import '@/ai/flows/color-palette-generator.ts';
 import '@/ai/flows/privacy-policy-generator.ts';
 import '@/ai/flows/pdf-to-text-flow.ts';
+import '@/ai/flows/story-generator.ts';
