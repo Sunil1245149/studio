@@ -9,6 +9,7 @@ import { Hammer } from 'lucide-react';
 import { LanguageSelector } from '@/components/language-selector';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { AppSidebar } from '@/components/app-sidebar';
+import { Footer } from '@/components/footer';
 
 
 export const metadata: Metadata = {
@@ -46,14 +47,19 @@ export default function RootLayout({
               </SidebarContent>
             </Sidebar>
             <SidebarInset>
-              <header className="sticky top-0 z-40 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-                <SidebarTrigger className="sm:hidden" />
-                <div className="ml-auto flex items-center gap-2">
-                  <LanguageSelector />
-                  <ThemeToggle />
-                </div>
-              </header>
-              {children}
+              <div className="flex flex-col min-h-screen">
+                <header className="sticky top-0 z-40 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+                  <SidebarTrigger className="sm:hidden" />
+                  <div className="ml-auto flex items-center gap-2">
+                    <LanguageSelector />
+                    <ThemeToggle />
+                  </div>
+                </header>
+                <main className="flex-grow">
+                  {children}
+                </main>
+                <Footer />
+              </div>
             </SidebarInset>
           </SidebarProvider>
           <Toaster />

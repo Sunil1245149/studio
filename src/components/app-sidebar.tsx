@@ -11,11 +11,11 @@ export function AppSidebar() {
     <SidebarMenu>
       {toolsData.map((category) => (
         <SidebarMenuItem key={category.id}>
-           <Link href={`/#${category.id}`} className="w-full">
-            <SidebarMenuButton className="w-full justify-start">
+           <SidebarMenuButton asChild className="w-full justify-start">
+             <Link href={`/#${category.id}`}>
                {category.name[language]}
-            </SidebarMenuButton>
-          </Link>
+             </Link>
+          </SidebarMenuButton>
         </SidebarMenuItem>
       ))}
     </SidebarMenu>
